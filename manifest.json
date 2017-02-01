@@ -1,6 +1,6 @@
 {
 	"name": "New Tab Page",
-	"version": "1.1",
+	"version": "1.3",
 	"minimum_chrome_version": "37",
 	"manifest_version": 2,
 	"description": "Rokco's custom new tab page",
