@@ -1,0 +1,29 @@
+{
+	"name": "New Tab Page",
+	"version": "1.1",
+	"minimum_chrome_version": "37",
+	"manifest_version": 2,
+	"description": "Rokco's custom new tab page",
+	"icons": {
+		"128": "icon_128.png",
+		 "48": "icon_48.png",
+		 "16": "icon_16.png"
+	},
+	"permissions": [
+		"bookmarks",
+		"chrome://favicon/",
+		"topSites",
+		"management",
+		"tabs",
+		"fontSettings",
+		"sessions",
+		"geolocation"
+	],
+	"chrome_url_overrides":
+	{
+		"newtab": "index.html"
+	},
+	"web_accessible_resources": [
+		"index.html"
+	]
+}
