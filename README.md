@@ -9,3 +9,5 @@ var config = {
   owAPI : 'MY_API_KEY_HERE'
 }
 ~~~~
+
+![Alt](http://i.imgur.com/UR36A5K.jpg "Title")
