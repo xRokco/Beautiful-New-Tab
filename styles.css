@@ -13,7 +13,7 @@ body {
 }
 
 body:after {
-	/*content: url(http://rokco.org/backdrop/images/001.jpg) url(http://rokco.org/backdrop/images/002.jpg) url(http://rokco.org/backdrop/images/003.jpg) url(http://rokco.org/backdrop/images/004.jpg) url(http://rokco.org/backdrop/images/005.jpg) url(http://rokco.org/backdrop/images/006.jpg) url(http://rokco.org/backdrop/images/007.jpg) url(http://rokco.org/backdrop/images/008.jpg) url(http://rokco.org/backdrop/images/009.jpg);*/
+	content: url(resources/001.jpg) url(resources/002.jpg) url(resources/003.jpg) url(resources/004.jpg) url(resources/005.jpg) url(resources/006.jpg) url(resources/007.jpg) url(resources/008.jpg) url(resources/009.jpg);
 	display: none;
 }
 
