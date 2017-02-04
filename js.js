@@ -1,68 +1,88 @@
 $(document).ready(function() {
-	//Background
+	//Get a background image
 	function backdrop() {
 
+		//check if you have an image cached, if so, use it
 		if (localStorage.getItem('imgSaved')) {
 			console.log("trying to get saved image");
+			//set the background to the cached image
 			var imgSaved = localStorage.getItem('imgSaved');
 			document.getElementById("body").style.backgroundImage = "url('"+imgSaved+"')";
+			//update the image metadata previously cached
 			var linkSaved = localStorage.getItem('linkSaved');
 			var nameSaved = localStorage.getItem('nameSaved');
 			var credit = 'Photo by <a href="' + linkSaved + '" target="_blank">' + nameSaved + '</a> on Unsplash';
 			document.getElementById('infodiv').innerHTML = credit;
 		} else {
-			console.log("backup");
+			console.log("no image cached, using backup image");
 			backup();
 		}
 
 		var unsplashAPI = config.unsplashAPI;
-		var randNum = Math.floor(Math.random() * 2);
+		var randNum = Math.floor(Math.random() * 2); //get random integer between 0 and 1 inclusive.
 		var width = document.body.clientWidth;
-		var categories = ["2", "4"]
+		var categories = ["2", "4"]; //possible unsplash categories to pick from. 2 = nature, 4 = buildings.
 
+		//get the image url, photographer name and Unsplash profile of a random image from the Unsplash API.
 		$.getJSON('https://api.unsplash.com/photos/random?client_id=' + unsplashAPI + '&featured=true&category=' + categories[randNum] + '&orientation=landscape&w='+width, function(data) {
 			var url = data.urls.full;
 			var link = data.user.links.html;
 			var name = data.user.name;
 
+			//clear the local storage of any previous data.
 			localStorage.clear();
 
+			//create a new image to cache
 			var img1= new Image();
-			img1.setAttribute('crossOrigin', 'anonymous');
+			img1.setAttribute('crossOrigin', 'anonymous'); //set this attribute to get around cross origin canvas security stuff.
 			img1.src = url;
-			img1.onload = function(e) {
-				//console.log(img1);
-				imgData = getBase64Image(img1);
+			img1.onload = function(e) { //when the img loads, do some stuff
+				imgData = getBase64Image(img1); //convert the image to a Base64 url
+				//save the base64 url and the metadata.
 				localStorage.setItem("imgSaved", imgData);
 				localStorage.setItem("linkSaved", link);
 				localStorage.setItem("nameSaved", name);
 			};
-		}).error(function() { 
+		}).error(function() { //if the API call fails, run the backup function
+			console.log("error in API call, using backup image");
 			backup();
 		});
 	}
 
 	backdrop();
+
+	//generate a new image on click of the info button
 	$('#info').click(function(){
 		backdrop();
 	});
 
+	//show the image credit on hover of the info button
 	$('#info').hover(function(){
 		document.getElementById('infodiv').style.opacity = 1;
 	});
 
+	//hide the image credit box when you click on it
 	$('#infodiv').click(function(){
 		document.getElementById('infodiv').style.opacity = 0;
 	});
 
+	//This function is called when there's an issue getting an image fron Unsplash
 	function backup() {
-		var code = String(Math.floor((Math.random() * 9) + 1));
+		var code = String(Math.floor((Math.random() * 9) + 1)); //get a random integer between 1 and 9 inclusive
+
+		//store the random int from above in a new variable in order to get the credit from the array 
 		var altcode = code;
+
+		//pad the random number from above with zeroes until it's 3 digits long.
 		while (code.length < 3) {
 				code = "0" + code;
 		};
+
+		//set the body background to a random image gotten from the random int above 
 		var backgroundcode = "resources/" + code + ".jpg";
 		document.getElementById("body").style.backgroundImage = "url('"+backgroundcode+"')";
+
+		//create an array of the image credit
 		var alt = new Array();
 		alt[0] = "";
 		alt[1] = "Mt. McKinley, Alaska.";
@@ -75,6 +95,7 @@ $(document).ready(function() {
 		alt[8] = "Twelve Apostles, Australia.";
 		alt[9] = "Alabama Hills, CA.";
 
+		//get the correct value from the array from the random in for the image
 		var alttext = alt[altcode];
 		document.getElementById("infodiv").innerHTML = alttext;
 	}
@@ -86,13 +107,17 @@ $(document).ready(function() {
     	return i;
 	}
 
+
+	//get date and time
 	function startTime() {
+		//get current date and time
 		var today=new Date();
 		var h=today.getHours();
 		var m=today.getMinutes();
 		var d=today.getDate();
 		var month = ["January","February","March","April","May","June","July","August","September","October","November","December"]
 
+		//add the superscript st, nd, rd and th to the date value
 		var j = d % 10,
 		    k = d % 100;
 		if (j == 1 && k != 11) {
@@ -105,48 +130,56 @@ $(document).ready(function() {
 			d = d + "<sup>th</sup>";
 		}
 
+		//format date as 1st January
 		var n = month[today.getMonth()];
 		m = checkTime(m);
-		h = checkTime(h)
+		h = checkTime(h);
+
 		document.getElementById('txt').innerHTML = h+":"+m;
 		document.getElementById('txt2').innerHTML = d + " " + n;
-		var t = setTimeout(function(){startTime()},500);
+		var t = setTimeout(function(){startTime()},500);//run this function every half second to update the time.
 	}
 	startTime();
 
-	//weather geolocation
+	//get the location of the user for the weather API
 	navigator.geolocation.getCurrentPosition(function(position) {
 		loadWeather(position.coords.latitude, position.coords.longitude); //load weather using your lat/lng coordinates
 	});
 });
 
-//weather
+//get weather
 function loadWeather(lat, lon) {
-	var owAPi = config.owAPI;
+	var owAPi = config.owAPI; //OpenWeather API
+
+	//get the temperature and image icon ID from openweather api
 	$.getJSON('http://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&appid='+ owAPi, function(data) {
 		//console.log(data);
-		var temp = Math.round(data.main.temp - 273.15);
-		var now = new Date().getTime() / 1000;
+		var temp = Math.round(data.main.temp - 273.15); //convert temperature to celcius.
+		var now = new Date().getTime() / 1000; //get current time in seconds to check if it's night or day
 
-		if(now > data.sys.sunrise && now < data.sys.sunset){
-			var suffix = '-d';
-			} else {
-			var suffix = '-n';
-			}
+		if(now > data.sys.sunrise && now < data.sys.sunset){ //if it's daytime (after sunright and before sunset)
+			var suffix = '-d'; //append a "-d" to get a daytime icon
+		} else {
+			var suffix = '-n'; //otherwise append an "-n" for nighttime icon
+		}
 
+		//set the temperature with weather icon
 		document.getElementById('weather').innerHTML = '<i class="owf owf-' + data.weather[0].id + suffix + '"></i> ' + temp + '&#8451';
 	});
 }
 
+//Convert an image to base64 URL
 function getBase64Image(img) {
-    var canvas = document.createElement("canvas");
+    var canvas = document.createElement("canvas"); //create a canvas
+    
+    //set canvas width and height to image width and height
     canvas.width = img.width;
     canvas.height = img.height;
 
     var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
+    ctx.drawImage(img, 0, 0); //add the image to the canvas
 
-    var dataURL = canvas.toDataURL("image/jpeg");
+    var dataURL = canvas.toDataURL("image/jpeg"); //convert canvas to base64 data url
 
-    return dataURL;
+    return dataURL; //return the URL
 }
