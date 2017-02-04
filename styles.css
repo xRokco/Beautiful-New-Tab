@@ -71,6 +71,25 @@ body:after {
     transition-duration: 1s;
 }
 
+#infodiv {
+	font-size: 15px;
+	color: lightgrey;
+	font-family: 'Raleway', sans-serif;
+	position: absolute;
+	top: 25px;
+	right: 80px;
+	height: 30px;
+	z-index: 99;
+	background-color: rgba(110,110,110,0.6);
+	opacity: 0;
+	padding: 10px;
+	padding-top: 20px;
+	-webkit-transition-duration: 1s;
+    -moz-transition-duration: 1s;
+    -o-transition-duration: 1s;
+    transition-duration: 1s;
+}
+
 #weather {
 	font-family: 'Raleway', sans-serif;
 	font-size: 80px;

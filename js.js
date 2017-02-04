@@ -1,7 +1,62 @@
 $(document).ready(function() {
 	//Background
 	function backdrop() {
-		var code = String(Math.round(8*Math.random()+1));
+
+		if (localStorage.getItem('imgSaved')) {
+			console.log("trying to get saved image");
+			var imgSaved = localStorage.getItem('imgSaved');
+			document.getElementById("body").style.backgroundImage = "url('"+imgSaved+"')";
+			var linkSaved = localStorage.getItem('linkSaved');
+			var nameSaved = localStorage.getItem('nameSaved');
+			var credit = 'Photo by <a href="' + linkSaved + '" target="_blank">' + nameSaved + '</a> on Unsplash';
+			document.getElementById('infodiv').innerHTML = credit;
+		} else {
+			console.log("backup");
+			backup();
+		}
+
+		var unsplashAPI = config.unsplashAPI;
+		var randNum = Math.floor(Math.random() * 2);
+		var width = document.body.clientWidth;
+		var categories = ["2", "4"]
+
+		$.getJSON('https://api.unsplash.com/photos/random?client_id=' + unsplashAPI + '&featured=true&category=' + categories[randNum] + '&orientation=landscape&w='+width, function(data) {
+			var url = data.urls.full;
+			var link = data.user.links.html;
+			var name = data.user.name;
+
+			localStorage.clear();
+
+			var img1= new Image();
+			img1.setAttribute('crossOrigin', 'anonymous');
+			img1.src = url;
+			img1.onload = function(e) {
+				//console.log(img1);
+				imgData = getBase64Image(img1);
+				localStorage.setItem("imgSaved", imgData);
+				localStorage.setItem("linkSaved", link);
+				localStorage.setItem("nameSaved", name);
+			};
+		}).error(function() { 
+			backup();
+		});
+	}
+
+	backdrop();
+	$('#info').click(function(){
+		backdrop();
+	});
+
+	$('#info').hover(function(){
+		document.getElementById('infodiv').style.opacity = 1;
+	});
+
+	$('#infodiv').click(function(){
+		document.getElementById('infodiv').style.opacity = 0;
+	});
+
+	function backup() {
+		var code = String(Math.floor((Math.random() * 9) + 1));
 		var altcode = code;
 		while (code.length < 3) {
 				code = "0" + code;
@@ -21,13 +76,9 @@ $(document).ready(function() {
 		alt[9] = "Alabama Hills, CA.";
 
 		var alttext = alt[altcode];
-		document.getElementById("info").title = alttext;
+		document.getElementById("infodiv").innerHTML = alttext;
 	}
 
-	backdrop();
-	$('#info').click(function(){
-		backdrop();
-	});
 
 	//Date and Time
 	function checkTime(i) {
@@ -73,8 +124,8 @@ $(document).ready(function() {
 function loadWeather(lat, lon) {
 	var owAPi = config.owAPI;
 	$.getJSON('http://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&appid='+ owAPi, function(data) {
-		console.log(data);
-		var temp = data.main.temp - 273.15;
+		//console.log(data);
+		var temp = Math.round(data.main.temp - 273.15);
 		var now = new Date().getTime() / 1000;
 
 		if(now > data.sys.sunrise && now < data.sys.sunset){
@@ -85,4 +136,17 @@ function loadWeather(lat, lon) {
 
 		document.getElementById('weather').innerHTML = '<i class="owf owf-' + data.weather[0].id + suffix + '"></i> ' + temp + '&#8451';
 	});
+}
+
+function getBase64Image(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+
+    var dataURL = canvas.toDataURL("image/jpeg");
+
+    return dataURL;
 }
