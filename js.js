@@ -1,55 +1,6 @@
 $(document).ready(function() {
-	//Get a background image
-	function backdrop() {
-
-		//check if you have an image cached, if so, use it
-		if (localStorage.getItem('imgSaved')) {
-			console.log("trying to get saved image");
-			//set the background to the cached image
-			var imgSaved = localStorage.getItem('imgSaved');
-			document.getElementById("body").style.backgroundImage = "url('"+imgSaved+"')";
-			//update the image metadata previously cached
-			var linkSaved = localStorage.getItem('linkSaved');
-			var nameSaved = localStorage.getItem('nameSaved');
-			var credit = 'Photo by <a href="' + linkSaved + '" target="_blank">' + nameSaved + '</a> on Unsplash';
-			document.getElementById('infodiv').innerHTML = credit;
-		} else {
-			console.log("no image cached, using backup image");
-			backup();
-		}
-
-		var unsplashAPI = config.unsplashAPI;
-		var randNum = Math.floor(Math.random() * 2); //get random integer between 0 and 1 inclusive.
-		var width = document.body.clientWidth;
-		var categories = ["2", "4"]; //possible unsplash categories to pick from. 2 = nature, 4 = buildings.
-
-		//get the image url, photographer name and Unsplash profile of a random image from the Unsplash API.
-		$.getJSON('https://api.unsplash.com/photos/random?client_id=' + unsplashAPI + '&featured=true&category=' + categories[randNum] + '&orientation=landscape&w='+width, function(data) {
-			var url = data.urls.full;
-			var link = data.user.links.html;
-			var name = data.user.name;
-
-			//clear the local storage of any previous data.
-			localStorage.clear();
-
-			//create a new image to cache
-			var img1= new Image();
-			img1.setAttribute('crossOrigin', 'anonymous'); //set this attribute to get around cross origin canvas security stuff.
-			img1.src = url;
-			img1.onload = function(e) { //when the img loads, do some stuff
-				imgData = getBase64Image(img1); //convert the image to a Base64 url
-				//save the base64 url and the metadata.
-				localStorage.setItem("imgSaved", imgData);
-				localStorage.setItem("linkSaved", link);
-				localStorage.setItem("nameSaved", name);
-			};
-		}).error(function() { //if the API call fails, run the backup function
-			console.log("error in API call, using backup image");
-			backup();
-		});
-	}
-
-	backdrop();
+	//backdrop();
+	chrome.runtime.sendMessage({text: "newtab"});
 
 	//generate a new image on click of the info button
 	$('#info').click(function(){
@@ -65,6 +16,25 @@ $(document).ready(function() {
 	$('#infodiv').click(function(){
 		document.getElementById('infodiv').style.opacity = 0;
 	});
+
+	//Get a background image
+	function backdrop() {
+		//check if you have an image cached, if so, use it
+		if (localStorage.getItem('imgSaved')) {
+			console.log("trying to get saved image");
+			//set the background to the cached image
+			var imgSaved = localStorage.getItem('imgSaved');
+			document.getElementById("body").style.backgroundImage = "url('"+imgSaved+"')";
+			//update the image metadata previously cached
+			var linkSaved = localStorage.getItem('linkSaved');
+			var nameSaved = localStorage.getItem('nameSaved');
+			var credit = 'Photo by <a href="' + linkSaved + '" target="_blank">' + nameSaved + '</a> on Unsplash';
+			document.getElementById('infodiv').innerHTML = credit;
+		} else {
+			console.log("no image cached, using backup image");
+			backup();
+		}
+	}
 
 	//This function is called when there's an issue getting an image fron Unsplash
 	function backup() {
@@ -100,6 +70,7 @@ $(document).ready(function() {
 		document.getElementById("infodiv").innerHTML = alttext;
 	}
 
+	backdrop();
 
 	//Date and Time
 	function checkTime(i) {

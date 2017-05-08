@@ -11,9 +11,11 @@
 	},
 	"permissions": [
 		"geolocation",
-		"storage",
 		"storage"
 	],
+	"background": {
+    	"scripts": ["jquery.min.js","config.js","background.js"]
+  	},
 	"chrome_url_overrides":
 	{
 		"newtab": "index.html"
