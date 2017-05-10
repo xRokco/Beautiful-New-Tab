@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="jquery.min.js"></script>
+        <title>New Tab Page Options</title>
+    </head>
+    <body>
+
+        Temperature format:
+        <select id="temperature">
+            <option value="c">Celsius</option>
+            <option value="f">Fahrenheit</option>
+        </select>
+
+        <br/>
+        Time format:
+        <select id="time">
+            <option value="12">12 hour</option>
+            <option value="24">24 hour</option>
+        </select>
+
+        <br/>
+        Links: <br>
+        Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
+        Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
+        Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
+        Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
+        Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
+        Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
+        Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
+        Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
+        Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
+        Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
+
+        <div id="accordion">
+            <p>You can put in raw html here to populate the links table if you know what you're doing</p>
+            Use raw HTML: <input type="checkbox" name="raw" id="raw"><br>
+            <textarea id="advanced"></textarea>
+        </div>
+
+        <div id="status"></div>
+        <button id="save">Save</button>
+
+        <script src="options.js"></script>
+    </body>
+</html>

@@ -8,7 +8,7 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background-position: center bottom;
+    background-position: center center;
 
 }
 
@@ -20,8 +20,12 @@ body {
 }
 
 body:after {
-	content: url(resources/001.jpg) url(resources/002.jpg) url(resources/003.jpg) url(resources/004.jpg) url(resources/005.jpg) url(resources/006.jpg) url(resources/007.jpg) url(resources/008.jpg) url(resources/009.jpg);
+	/*content: url(resources/001.jpg) url(resources/002.jpg) url(resources/003.jpg) url(resources/004.jpg) url(resources/005.jpg) url(resources/006.jpg) url(resources/007.jpg) url(resources/008.jpg) url(resources/009.jpg);*/
 	display: none;
+}
+
+#small {
+	font-size: 0.3em;
 }
 
 #txt {
@@ -82,7 +86,6 @@ body:after {
 	font-size: 15px;
 	color: lightgrey;
 	font-family: 'Raleway', sans-serif;
-	position: absolute;
 	top: 25px;
 	right: 80px;
 	height: 30px;
@@ -95,6 +98,7 @@ body:after {
     -moz-transition-duration: 1s;
     -o-transition-duration: 1s;
     transition-duration: 1s;
+    margin-right:10px;
 }
 
 #weather {
