@@ -3,44 +3,101 @@
     <head>
         <script type="text/javascript" src="jquery.min.js"></script>
         <title>New Tab Page Options</title>
+        <style type="text/css">
+            button.accordion {
+                background-color: #eee;
+                color: #444;
+                cursor: pointer;
+                padding: 18px;
+                width: 60%;
+                text-align: left;
+                border: none;
+                outline: none;
+                transition: 0.4s;
+            }
+
+            #plus {
+                float: right;
+            }
+
+            button.accordion.active, button.accordion:hover {
+                background-color: #ddd;
+            }
+
+            div.panel {
+                padding: 0 18px;
+                background-color: white;
+                display: none;
+            }
+
+            #wrapper {
+                margin-left: auto;
+                margin-right: auto;
+                width: 40%;
+                padding-left: 100px; 
+            }
+        </style>
     </head>
     <body>
 
-        Temperature format:
-        <select id="temperature">
-            <option value="c">Celsius</option>
-            <option value="f">Fahrenheit</option>
-        </select>
+        <div id="wrapper">
+            Temperature format:
+            <select id="temperature">
+                <option value="c">Celsius</option>
+                <option value="f">Fahrenheit</option>
+            </select>
 
-        <br/>
-        Time format:
-        <select id="time">
-            <option value="12">12 hour</option>
-            <option value="24">24 hour</option>
-        </select>
+            <br/>
+            <br/>
+            Time format:
+            <select id="time">
+                <option value="12">12 hour</option>
+                <option value="24">24 hour</option>
+            </select>
 
-        <br/>
-        Links: <br>
-        Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
-        Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
-        Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
-        Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
-        Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
-        Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
-        Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
-        Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
-        Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
-        Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
+            <br/>
+            <br/>
+            Links: <br>
+            Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
+            Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
+            Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
+            Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
+            Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
+            Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
+            Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
+            Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
+            Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
+            Link: <input type="text" class="link"> Label: <input type="text" class="label"> <br>
 
-        <div id="accordion">
-            <p>You can put in raw html here to populate the links table if you know what you're doing</p>
-            Use raw HTML: <input type="checkbox" name="raw" id="raw"><br>
-            <textarea id="advanced"></textarea>
+            <br/>
+
+            Photo categories: <br/>
+            Nature: <input type="checkbox" class="categories" name="2"><br>
+            Food & Drink: <input type="checkbox" class="categories" name="3"><br>
+            Buildings: <input type="checkbox" class="categories" name="4"><br>
+            People: <input type="checkbox" class="categories" name="6"><br>
+            Technology: <input type="checkbox" class="categories" name="7"><br>
+            Objects: <input type="checkbox" class="categories" name="8"><br>
+
+            <br/>
+            <button class="accordion">Advanced <span id="plus">+</span></button>
+            <div class="panel">
+                <div>
+                    <p>You can put in raw html here to populate the links box if you know what you're doing</p>
+                    Use raw HTML: <input type="checkbox" name="raw" id="raw"><br>
+                    <textarea id="advanced" cols="45" rows="8"></textarea>
+                </div>
+
+                OpenWeatherMap custom API key: <input type="text" id="weather">
+                <br/>
+                Unsplash custom API key: <input type="text" id="unsplash">
+            </div>
+
+            <div id="status"></div>
+            <br/>
+            <button id="save">Save</button>
+
+            <script src="options.js"></script>
         </div>
-
-        <div id="status"></div>
-        <button id="save">Save</button>
-
-        <script src="options.js"></script>
     </body>
 </html>

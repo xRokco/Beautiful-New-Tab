@@ -133,10 +133,14 @@ function loadWeather(lat, lon) {
     var owAPi = config.owAPI; //OpenWeather API
 
     //get the temperature and image icon ID from openweather api
-    $.getJSON('http://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&appid='+ owAPi, function(data) {
-        //console.log(data);
-        var temp = Math.round(data.main.temp - 273.15); //convert temperature to celcius.
-        chrome.storage.sync.get('temperature', function (obj) {
+    chrome.storage.sync.get(['weather', 'temperature'], function (obj) {
+        if(obj.weather && obj.weather != ''){
+            owAPi = obj.weather;
+        }
+
+        $.getJSON('http://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&appid='+ owAPi, function(data) {
+            //console.log(data);
+            var temp = Math.round(data.main.temp - 273.15); //convert temperature to celcius.
             if(obj.temperature == 'f'){
                 console.log('fahr');
                 temp = Math.round((temp * (9/5)) + 32);
@@ -160,18 +164,16 @@ function loadWeather(lat, lon) {
 }
 
 function linkPopulate() {
-    chrome.storage.sync.get('raw', function (obj2) {
-        chrome.storage.sync.get('links', function (obj) {
-            if(obj2.raw == false) {
-                var text = '<ul>';
-                for (var i = 0; i < obj.links.length; i++) {
-                    text += '<li><a href="' + obj.links[i].link + '">' + obj.links[i].label + '</a></li>';
-                }
-                text += '</ul>';
-                document.getElementById("txt3").innerHTML = text;
-            } else {
-                document.getElementById("txt3").innerHTML = obj.links;
+    chrome.storage.sync.get(['raw', 'links'], function (obj) {
+        if(obj.raw == false) {
+            var text = '<ul>';[]
+            for (var i = 0; i < obj.links.length; i++) {
+                text += '<li><a href="' + obj.links[i].link + '">' + obj.links[i].label + '</a></li>';
             }
-        });
+            text += '</ul>';
+            document.getElementById("txt3").innerHTML = text;
+        } else {
+            document.getElementById("txt3").innerHTML = obj.links;
+        }
     });
 }

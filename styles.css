@@ -99,6 +99,7 @@ body:after {
     -o-transition-duration: 1s;
     transition-duration: 1s;
     margin-right:10px;
+    padding-bottom: 17px;
 }
 
 #weather {

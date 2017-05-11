@@ -1,6 +1,6 @@
 {
 	"name": "New Tab Page",
-	"version": "1.6",
+	"version": "1.7",
 	"minimum_chrome_version": "37",
 	"manifest_version": 2,
 	"description": "Rokco's custom new tab page",
@@ -11,7 +11,8 @@
 	},
 	"permissions": [
 		"geolocation",
-		"storage"
+		"storage",
+		"unlimitedStorage"
 	],
 	"background": {
     	"scripts": ["jquery.min.js","config.js","background.js"]
