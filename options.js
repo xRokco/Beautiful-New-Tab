@@ -10,6 +10,7 @@ function save_options() {
     var weather = document.getElementById('weather').value;
     var unsplash = document.getElementById('unsplash').value;
     var categories = document.getElementsByClassName('categories');
+    var featured = document.getElementById('featured').checked;
 
     for (var i = 0; i < categories.length; i++){
         if(categories[i].checked){
@@ -17,7 +18,7 @@ function save_options() {
         }
     }
 
-    console.log(catarray);
+    // console.log(catarray);
 
     if(raw == false){
         for (var i = 0; i < links.length; i++) {
@@ -37,7 +38,8 @@ function save_options() {
         raw: raw,
         weather: weather,
         unsplash: unsplash,
-        categories: catarray
+        categories: catarray,
+        featured: featured
     }, function() {
         // Update status to let user know options were saved.
         var status = document.getElementById('status');
@@ -71,13 +73,15 @@ function restore_options() {
         raw: false,
         weather: '',
         unsplash: '',
-        categories: [2, 4]
+        categories: [2, 4],
+        featured: true
     }, function(items) {
         document.getElementById('temperature').value = items.temperature;
         document.getElementById('time').value = items.time;
         document.getElementById('raw').checked = items.raw;
         document.getElementById('weather').value = items.weather;
         document.getElementById('unsplash').value = items.unsplash;
+        document.getElementById('featured').checked = items.featured;
         for (var i = 0; i < items.categories.length; i++){
             document.getElementsByName(items.categories[i])[0].checked = true;
         }

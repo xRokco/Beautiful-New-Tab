@@ -100,6 +100,7 @@ body:after {
     transition-duration: 1s;
     margin-right:10px;
     padding-bottom: 17px;
+	text-shadow: none;
 }
 
 #weather {
@@ -122,6 +123,10 @@ a {
 	color: lightgrey;
 	font-family: 'Raleway', sans-serif;
 	cursor: pointer;
+}
+
+#infodiv a {
+	text-decoration: underline;
 }
 
 ul {

@@ -17,6 +17,21 @@ $(document).ready(function() {
 
     //Get a background image
     function backdrop() {
+        // var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);
+
+        // db.transaction(function (tx) { //check if you have an image cached, if so, use it
+        //     tx.executeSql('SELECT * FROM IMAGE', [], function (tx, results) {
+        //         if(results.rows.length > 0){
+        //             document.getElementById("body").style.backgroundImage = "url('"+results.rows[0].imgData+"')";
+        //             var credit = 'Photo by <a href="' + results.rows[0].unsplashLink + '?utm_source=newtabpage&utm_medium=referral&utm_campaign=api-credit" target="_blank">' + results.rows[0].photographerName + '</a> on Unsplash';
+        //             document.getElementById('infodiv').innerHTML = credit;
+        //         } else {
+        //             console.log("no image cached, using backup image");
+        //             backup();
+        //         }
+        //     }, null);
+        // });
+
         //check if you have an image cached, if so, use it
         if (localStorage.getItem('imgSaved')) {
             console.log("trying to get saved image");
@@ -26,7 +41,7 @@ $(document).ready(function() {
             //update the image metadata previously cached
             var linkSaved = localStorage.getItem('linkSaved');
             var nameSaved = localStorage.getItem('nameSaved');
-            var credit = 'Photo by <a href="' + linkSaved + '?utm_source=newtabpage&utm_medium=referral&utm_campaign=api-credit" target="_blank">' + nameSaved + '</a> on Unsplash';
+            var credit = 'Photo by <a href="' + linkSaved + '?utm_source=beautifulnewtab&utm_medium=referral&utm_campaign=api-credit" target="_blank">' + nameSaved + '</a> on Unsplash';
             document.getElementById('infodiv').innerHTML = credit;
         } else {
             console.log("no image cached, using backup image");
@@ -36,7 +51,7 @@ $(document).ready(function() {
 
     //This function is called when there's an issue getting an image fron Unsplash
     function backup() {
-        var code = String(Math.floor((Math.random() * 9) + 1)); //get a random integer between 1 and 9 inclusive
+        var code = String(Math.floor((Math.random() * 5) + 1)); //get a random integer between 1 and 4 inclusive
 
         //store the random int from above in a new variable in order to get the credit from the array 
         var altcode = code;
@@ -53,15 +68,11 @@ $(document).ready(function() {
         //create an array of the image credit
         var alt = new Array();
         alt[0] = "";
-        alt[1] = "Mt. McKinley, Alaska.";
-        alt[2] = "Lofoten Islands, Norway.";
-        alt[3] = "Volcán de Fuego, Guatemala. Photo by Andrew Shepard.";
-        alt[4] = "Steptoe Butte State Park, Washington. Photo by Craig Goodwin.";
-        alt[5] = "Arches National Park, Utah. Photo by Patrik Oberlin.";
-        alt[6] = "Antelope Canyon, Arizona.";
-        alt[7] = "Svalbard, Norway. Photo by Paul Nicklen.";
-        alt[8] = "Twelve Apostles, Australia.";
-        alt[9] = "Alabama Hills, CA.";
+        alt[1] = "Photo by <a href='https://unsplash.com/@aleskrivec?utm_source=beautifulnewtab&utm_medium=referral&utm_campaign=api-credit' target='_blank'>Ales Krivec</a> on Unsplash";
+        alt[2] = "Photo by <a href='https://unsplash.com/@blakeverdoorn?utm_source=beautifulnewtab&utm_medium=referral&utm_campaign=api-credit' target='_blank'>Blake Richard Verdoorn</a> on Unsplash";
+        alt[3] = "Photo by <a href='https://unsplash.com/@dannyfroese?utm_source=beautifulnewtab&utm_medium=referral&utm_campaign=api-credit' target='_blank'>Danny Froese</a> on Unsplash";
+        alt[4] = "Photo by <a href='https://unsplash.com/@reddangelo16?utm_source=beautifulnewtab&utm_medium=referral&utm_campaign=api-credit' target='_blank'>Redd Angelo</a> on Unsplash";
+        alt[5] = "Photo by <a href='https://unsplash.com/@henrymcintosh?utm_source=beautifulnewtab&utm_medium=referral&utm_campaign=api-credit' target='_blank'>Henry McIntosh</a> on Unsplash";
 
         //get the correct value from the array from the random in for the image
         var alttext = alt[altcode];

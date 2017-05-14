@@ -2,7 +2,7 @@
 <html>
     <head>
         <script type="text/javascript" src="jquery.min.js"></script>
-        <title>New Tab Page Options</title>
+        <title>Beautiful New Tab Options</title>
         <style type="text/css">
             button.accordion {
                 background-color: #eee;
@@ -72,14 +72,21 @@
             <br/>
 
             Photo categories: <br/>
-            Nature: <input type="checkbox" class="categories" name="2"><br>
-            Food & Drink: <input type="checkbox" class="categories" name="3"><br>
-            Buildings: <input type="checkbox" class="categories" name="4"><br>
-            People: <input type="checkbox" class="categories" name="6"><br>
-            Technology: <input type="checkbox" class="categories" name="7"><br>
-            Objects: <input type="checkbox" class="categories" name="8"><br>
+            <label for="2">Buldings: </label><input type="checkbox" class="categories" id="2" name="2"><br>
+            <label for="3">Food & Drink: </label><input type="checkbox" class="categories" id="3" name="3"><br>
+            <label for="4">Nature: </label><input type="checkbox" class="categories" id="4" name="4"><br>
+            <label for="6">People: </label><input type="checkbox" class="categories" id="6" name="6"><br>
+            <label for="7">Technology: </label><input type="checkbox" class="categories" id="7" name="7"><br>
+            <label for="8">Objects: </label><input type="checkbox" class="categories" id="8" name="8"><br>
 
             <br/>
+
+            <label for="featured">Only show featured photos: </label><input type="checkbox" id="featured" name="featured"> <br>
+            Featured photo's are often more beautiful than regular ones, but there are far fewer so you might see repetition.
+
+            <br/>
+            <br/>
+
             <button class="accordion">Advanced <span id="plus">+</span></button>
             <div class="panel">
                 <div>
