@@ -155,9 +155,12 @@ function loadWeather(lat, lon) {
             if(obj.temperature == 'f'){
                 console.log('fahr');
                 temp = Math.round((temp * (9/5)) + 32);
-                code = '&#8457';
+                code = '&deg;F';
+            } else if (obj.temperature == 'c') {
+                code = '&deg;C';
             } else {
-                code = '&#8451';
+                temp = Math.round(data.main.temp);
+                code = 'K';
             }
 
             var now = new Date().getTime() / 1000; //get current time in seconds to check if it's night or day
