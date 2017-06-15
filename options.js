@@ -11,6 +11,7 @@ function save_options() {
     var unsplash = document.getElementById('unsplash').value;
     var categories = document.getElementsByClassName('categories');
     var featured = document.getElementById('featured').checked;
+    var bookmark = document.getElementById('bookmark').checked;
 
     for (var i = 0; i < categories.length; i++){
         if(categories[i].checked){
@@ -39,7 +40,8 @@ function save_options() {
         weather: weather,
         unsplash: unsplash,
         categories: catarray,
-        featured: featured
+        featured: featured,
+        bookmark: bookmark
     }, function() {
         // Update status to let user know options were saved.
         var status = document.getElementById('status');
@@ -74,7 +76,8 @@ function restore_options() {
         weather: '',
         unsplash: '',
         categories: [2, 4],
-        featured: true
+        featured: true,
+        bookmark: false
     }, function(items) {
         document.getElementById('temperature').value = items.temperature;
         document.getElementById('time').value = items.time;
@@ -82,6 +85,7 @@ function restore_options() {
         document.getElementById('weather').value = items.weather;
         document.getElementById('unsplash').value = items.unsplash;
         document.getElementById('featured').checked = items.featured;
+        document.getElementById('bookmark').checked = items.bookmark;
         for (var i = 0; i < items.categories.length; i++){
             document.getElementsByName(items.categories[i])[0].checked = true;
         }

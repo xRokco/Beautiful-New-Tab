@@ -17,11 +17,29 @@ body {
     -moz-transition-duration: 2s;
     -o-transition-duration: 2s;
     transition-duration: 2s;
+    margin-top:0px;
 }
 
 body:after {
 	/*content: url(resources/001.jpg) url(resources/002.jpg) url(resources/003.jpg) url(resources/004.jpg) url(resources/005.jpg) url(resources/006.jpg) url(resources/007.jpg) url(resources/008.jpg) url(resources/009.jpg);*/
 	display: none;
+}
+
+#bookmarks {
+	display: inline-block;
+	background-color: rgba(110,110,110,0.6);
+	margin-top: 4px;
+	padding-top: 5px;
+}
+
+.bookmark {
+	margin-left: 4px;
+	margin-right: 4px;
+	font-size: 1.5em;
+}
+
+.bookmark img {
+	margin-right: 5px;
 }
 
 #small {

@@ -7,6 +7,7 @@ $(document).ready(function() {
 	chrome.storage.sync.get('links', function (obj) {
 		console.log("Set initial options");
         if (!obj.links) {
+        	chrome.tabs.create({'url':'/options.html'})
             chrome.storage.sync.set({
                 temperature: 'c',
                 time: 24,
@@ -23,6 +24,10 @@ $(document).ready(function() {
                         label: 'Reddit',
                         link: 'http://reddit.com'
                     },
+                    {
+                        label: 'Options',
+                        link: '/options.html'
+                    }
                 ],
                 raw: false,
                 weather: '',
@@ -58,10 +63,9 @@ function getBase64Image() {
         var randNum = Math.floor(Math.random() * obj.categories.length); //get random integer between 0 and 1 inclusive.
 
         //clear the local storage of any previous data.
-		localStorage.clear();
-		console.log(obj.categories);
+		//console.log(obj.categories);
 		var url = 'https://api.unsplash.com/photos/random?client_id=' + unsplashAPI + featured + '&category=' + obj.categories[randNum] + '&orientation=landscape';
-		console.log(url);
+		//console.log(url);
 		$.getJSON(url, function(data) {
 			var url = data.urls.full;
 			var link = data.user.links.html;
@@ -82,6 +86,10 @@ function getBase64Image() {
 			    ctx.drawImage(img, 0, 0); //add the image to the canvas
 
 			    var imgData = canvas.toDataURL("image/jpeg"); //convert canvas to base64 data url
+			    //console.log(imgData.length);
+			    if(imgData.length < 5000000) {
+			    	localStorage.clear();
+			    }
 				//save the base64 url and the metadata.
 				
 				// var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);
@@ -92,10 +100,15 @@ function getBase64Image() {
    	// 				tx.executeSql('INSERT INTO IMAGE (imgData, unsplashLink, photographerName) VALUES (?, ?, ?)', [imgData, link, name]);
 				// });
 
-				localStorage.setItem("imgSaved", imgData);
-				localStorage.setItem("linkSaved", link);
-				localStorage.setItem("nameSaved", name);
-				console.log("saved");
+				try {
+					localStorage.setItem("imgSaved", imgData);
+					localStorage.setItem("linkSaved", link);
+					localStorage.setItem("nameSaved", name);
+					console.log("success, image cached");
+				} catch(err) {
+					console.log("failed, retrying");
+					getBase64Image();
+				}
 			};
 		}).error(function() { //if the API call fails, run the backup function
 			console.log("error in API call");

@@ -28,6 +28,8 @@ To install, there are a couple of ways, both require you to be in developer mode
 This extension needs a couple of permissions and here's what they are and why they are needed -
 - **geolocation** - This is used to get your Lat and Lon values for the weather reporting
 - **storage** - This is used to cache the images to reduce load and render time when you open a new tab
+- **bookmarks** - This is to get your Chrome bookmarks to populate the (currently unfinished) bookmark bar feature
+- **chrome://favicon/** - This is also used by the bookmark bar feature to get the favicons chrome has cached
 
 That's it!
 
