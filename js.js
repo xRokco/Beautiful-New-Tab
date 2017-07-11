@@ -179,8 +179,8 @@ function loadWeather(lat, lon) {
 
 function linkPopulate() {
     chrome.storage.sync.get(['raw', 'links', 'bookmark'], function (obj) {
-        if(obj.raw == false) {
-            var text = '<ul>';[]
+        if(obj.raw == false && obj.links.length > 0) {
+            var text = '<ul>';
             for (var i = 0; i < obj.links.length; i++) {
                 text += '<li><a href="' + obj.links[i].link + '">' + obj.links[i].label + '</a></li>';
             }
@@ -198,10 +198,10 @@ function linkPopulate() {
                         if (!data[0].children[0].children[i].title) {
                             var title = "";
                         } else {
-                            var title = data[0].children[0].children[i].title;
+                            var title = data[0].children[0].children[i].title.substring(0, 16);
                         }
 
-                        text += "<a href=\"" + data[0].children[0].children[i].url + "\" class=\"bookmark\"><img src=\"chrome://favicon/" + data[0].children[0].children[i].url + "\" />" + title + "</a>";
+                        text += "<a href=\"" + data[0].children[0].children[i].url + "\" class=\"bookmark\"><img src=\"chrome://favicon/" + data[0].children[0].children[i].url + "\" /><span class=\"title\">" + title + "</span></a>";
                     } else {
                     }           
                 }

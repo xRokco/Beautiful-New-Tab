@@ -23,10 +23,12 @@ function save_options() {
 
     if(raw == false){
         for (var i = 0; i < links.length; i++) {
-            arr.push({
-                label: labels[i].value,
-                link: links[i].value
-            });
+            if(document.getElementsByClassName('link')[i].value != "" && document.getElementsByClassName('label')[i].value != "") {
+                arr.push({
+                    label: labels[i].value,
+                    link: links[i].value
+                });
+            }
         }    
     } else {
         var arr = document.getElementById("advanced").value;

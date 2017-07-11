@@ -18,6 +18,9 @@ body {
     -o-transition-duration: 2s;
     transition-duration: 2s;
     margin-top:0px;
+    margin-left: 0px;
+    margin-right: 0px;
+	overflow-x: hidden; 
 }
 
 body:after {
@@ -27,19 +30,33 @@ body:after {
 
 #bookmarks {
 	display: inline-block;
-	background-color: rgba(110,110,110,0.6);
-	margin-top: 4px;
+	background-color: rgba(223,223,223,1);
+	margin-top: 0px;
+	margin-left: 0px;
 	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 6px;
+	width: 100%;
 }
 
 .bookmark {
+	color: #123481;
 	margin-left: 4px;
 	margin-right: 4px;
-	font-size: 1.5em;
 }
 
 .bookmark img {
 	margin-right: 5px;
+	vertical-align: middle;
+}
+
+.title {
+	display: inline-block;
+  	vertical-align: middle;
+  	font-size: 1.3em;
+	background:linear-gradient(to right, rgba(18,52,129,1) 100px, rgba(18,52,129,0));
+	-webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 #small {
