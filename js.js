@@ -137,6 +137,22 @@ $(document).ready(function() {
     });
 
     linkPopulate();
+
+    $('#bookmarks').on('click', '#other', function(){
+        $('.dropdown-content').hide();
+        $(this).parent().children(".dropdown-content").show();
+    });
+
+    $('#bookmarks').on('click', '.folder', function(){
+        $('.dropdown-content').hide();
+        $(this).parent().children(".dropdown-content").show();
+    });
+
+    $(document).click(function(event){
+        if (event.target != document.getElementById('other') && $(event.target).attr('class') != "folder") {
+            $('.dropdown-content').hide();
+        }
+    });
 });
 
 //get weather
@@ -191,20 +207,58 @@ function linkPopulate() {
         }
 
         if(obj.bookmark){
+            $("#bookmarks").css("display", "inline-block");
             chrome.bookmarks.getTree(function(data){
+                console.log(data);
                 var text = "";
                 for (var i = 0; i < data[0].children[0].children.length; i++) {
                     if(data[0].children[0].children[i].url){
                         if (!data[0].children[0].children[i].title) {
                             var title = "";
                         } else {
-                            var title = data[0].children[0].children[i].title.substring(0, 16);
+                            var title = data[0].children[0].children[i].title.substring(0, 17);
                         }
 
                         text += "<a href=\"" + data[0].children[0].children[i].url + "\" class=\"bookmark\"><img src=\"chrome://favicon/" + data[0].children[0].children[i].url + "\" /><span class=\"title\">" + title + "</span></a>";
                     } else {
+                        if (!data[0].children[0].children[i].title) {
+                            var title = "";
+                        } else {
+                            var title = data[0].children[0].children[i].title.substring(0, 17);
+                        }
+
+                        text += "<span class=\"drop\"><span class=\"folder\"><img src=\"folder.png\"/>" + title + "</span><div class=\"dropdown-content\">";
+
+                        for (var j = 0; j < data[0].children[0].children[i].children.length; j++) {
+                            //console.log(data[0].children[0].children[i].children[j].url);
+                            if(data[0].children[0].children[i].children[j].url){
+                                if (!data[0].children[0].children[i].title) {
+                                    var title = "";
+                                } else {
+                                    var title = data[0].children[0].children[i].children[j].title;
+                                }
+
+                                text += "<a href=\"" + data[0].children[0].children[i].children[j].url + "\" class=\"bookmark full-width\"><img src=\"chrome://favicon/" + data[0].children[0].children[i].children[j].url + "\" /><span class=\"folder-title\">" + title + "</span></a><br/>";
+                            }       
+                        }
+                        text += "</div></span>"
                     }           
                 }
+
+                text += "<span class=\"other-drop\"><span id=\"other\"><img src=\"folder.png\"/>Other bookmarks</span><div class=\"dropdown-content content-other\">" 
+                for (var i = 0; i < data[0].children[1].children.length; i++) {
+                    if(data[0].children[1].children[i].url){
+                        if (!data[0].children[1].children[i].title) {
+                            var title = "";
+                        } else {
+                            var title = data[0].children[1].children[i].title;
+                        }
+
+                        text += "<a href=\"" + data[0].children[1].children[i].url + "\" class=\"bookmark full-width\"><img src=\"chrome://favicon/" + data[0].children[1].children[i].url + "\" /><span class=\"folder-title\">" + title + "</span></a><br/>";
+                    } else {
+                    }           
+                }
+                text += "</div></span>"
                 $("#bookmarks").html(text);
             });
         }
