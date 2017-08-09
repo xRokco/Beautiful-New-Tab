@@ -216,7 +216,7 @@ function linkPopulate() {
                         if (!data[0].children[0].children[i].title) {
                             var title = "";
                         } else {
-                            var title = data[0].children[0].children[i].title.substring(0, 17);
+                            var title = data[0].children[0].children[i].title;
                         }
 
                         text += "<a href=\"" + data[0].children[0].children[i].url + "\" class=\"bookmark\"><img src=\"chrome://favicon/" + data[0].children[0].children[i].url + "\" /><span class=\"title\">" + title + "</span></a>";
@@ -245,20 +245,22 @@ function linkPopulate() {
                     }           
                 }
 
-                text += "<span class=\"other-drop\"><span id=\"other\"><img src=\"folder.png\"/>Other bookmarks</span><div class=\"dropdown-content content-other\">" 
-                for (var i = 0; i < data[0].children[1].children.length; i++) {
-                    if(data[0].children[1].children[i].url){
-                        if (!data[0].children[1].children[i].title) {
-                            var title = "";
-                        } else {
-                            var title = data[0].children[1].children[i].title;
-                        }
+                if (data[0].children[1].title == "Other bookmarks") {
+                    text += "<span class=\"other-drop\"><span id=\"other\"><img src=\"folder.png\"/>Other bookmarks</span><div class=\"dropdown-content content-other\">" 
+                    for (var i = 0; i < data[0].children[1].children.length; i++) {
+                        if(data[0].children[1].children[i].url){
+                            if (!data[0].children[1].children[i].title) {
+                                var title = "";
+                            } else {
+                                var title = data[0].children[1].children[i].title;
+                            }
 
-                        text += "<a href=\"" + data[0].children[1].children[i].url + "\" class=\"bookmark full-width\"><img src=\"chrome://favicon/" + data[0].children[1].children[i].url + "\" /><span class=\"folder-title\">" + title + "</span></a><br/>";
-                    } else {
-                    }           
+                            text += "<a href=\"" + data[0].children[1].children[i].url + "\" class=\"bookmark full-width\"><img src=\"chrome://favicon/" + data[0].children[1].children[i].url + "\" /><span class=\"folder-title\">" + title + "</span></a><br/>";
+                        } else {
+                        }           
+                    }
+                    text += "</div></span>"    
                 }
-                text += "</div></span>"
                 $("#bookmarks").html(text);
             });
         }

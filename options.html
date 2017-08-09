@@ -92,20 +92,56 @@
             <div class="panel">
                 <div>
                     <p>You can put in raw html here to populate the links box if you know what you're doing</p>
-                    Use raw HTML: <input type="checkbox" name="raw" id="raw"><br>
+                    <label for="raw">Use raw HTML:</label> <input type="checkbox" name="raw" id="raw"><br>
                     <textarea id="advanced" cols="45" rows="8"></textarea>
                 </div>
 
-                OpenWeatherMap custom API key: <input type="text" id="weather">
+                <label for="weather">OpenWeatherMap custom API key:</label> <input type="text" id="weather">
                 <br/>
-                Unsplash custom API key: <input type="text" id="unsplash">
+                <label for="unsplash">Unsplash custom API key:</label> <input type="text" id="unsplash">
                 <br/>
-                Show Chrome bookmark bar equivalent on new tab (BETA FEATURE, UNFINISHED): <input type="checkbox" id="bookmark">
+                <label for="bookmark">Show Chrome bookmark bar equivalent on new tab (BETA FEATURE, UNFINISHED):</label> <input type="checkbox" id="bookmark">
             </div>
 
             <div id="status"></div>
             <br/>
             <button id="save">Save</button>
+
+            <h1>Changelog</h1>
+            <ul>
+                <h2>1.8</h2>
+                <li>Changed how the text fade out worked to hide text that is too long completely now and better match Chrome</li>
+                <li>Added a check to make sure the user actually has other bookmarks before creating the folder</li>
+                <li>changed some colours and font size to try better match Chrome on Windows look</li>
+                <li>Fixed the Other bookmarks background colour on hover</li>
+                <li>Added this changelog</li>
+                <li>Added labels to some setting that were missing them</li>
+                <h2>1.7</h2>
+                <li>Improvements to the bookmark bar including first level folder support and other bookmarks folder support. Still many limitations such as if the user has too many long bookmarks they will just be hidden with no way to see the hidden ones yet</li>
+                <li>Changed some bookmark bar styling to look much closer to Chrome's</li>
+                <h2>1.6</h2>
+                <li>Made it so if the box of links is left completely empty then the box that contains them won't even try to render</li>
+                <li>Fixed some minor typos</li>
+                <li>Added a primitive bookmark title cutoff length</li>
+                <h2>1.5</h2>
+                <li>Added initial bookmark bar replacement - this is barely functioning at this time but does give a list of your bookmark bar bookmarks across the top of the page. No folder support yet.</li>
+                <h2>1.4</h2>
+                <li>Minor bug fixes</li>
+                <h2>1.3</h2>
+                <li>Changed encoding for the degree symbol as it was not rendering correctly on some machines</li>
+                <li>Added Kelvin option for if you live somewhere close to absolute zero.</li>
+                <h2>1.2</h2>
+                <li>Changed how the scripts worked so the js file wouldnt load with every new tab</li>
+                <li>If an image fails to cache the extension will now retry quetly in the background, this should mean you almost never see one of the three offline images</li>
+                <h2>1.1</h2>
+                <li>Added options page</li>
+                <li>Fixed random number generation</li>
+                <li>Changed the offline backup images</li>
+                <li>Changed the names and descriptions of the extension</li>
+                <li>Added option of show all images rather than just featured ones</li>
+                <h1>1.0</h1>
+                <li>Initial release</li>
+            </ul>
 
             <script src="options.js"></script>
         </div>
