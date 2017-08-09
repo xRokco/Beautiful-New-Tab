@@ -245,7 +245,7 @@ function linkPopulate() {
                     }           
                 }
 
-                if (data[0].children[1].title == "Other bookmarks") {
+                if (data[0].children[1].title == "Other bookmarks" && data[0].children[1].children.length > 0) {
                     text += "<span class=\"other-drop\"><span id=\"other\"><img src=\"folder.png\"/>Other bookmarks</span><div class=\"dropdown-content content-other\">" 
                     for (var i = 0; i < data[0].children[1].children.length; i++) {
                         if(data[0].children[1].children[i].url){

@@ -309,5 +309,33 @@ a {
 
 ul {
 	list-style: none;
-	padding-right: 30px;
+	padding-right: 40px;
+}
+
+@media (max-width: 900px) {
+  #txt {
+    font-size: 165px;
+  }
+
+  #txt2 {
+  	font-size: 52.5px;
+  }
+
+  #weather {
+  	font-size: 60px;
+  }
+}
+
+@media (max-width: 750px) {
+  #txt {
+    font-size: 123.75px;
+  }
+
+  #txt2 {
+  	font-size: 39.375px;
+  }
+
+  #weather {
+  	font-size: 45px;
+  }
 }
