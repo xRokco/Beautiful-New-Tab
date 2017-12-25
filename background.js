@@ -32,8 +32,8 @@ $(document).ready(function() {
                 raw: false,
                 weather: '',
                 unsplash: '',
-                categories: [2, 4],
-                featured: true
+                additional: '',
+                categories: ['935527']
             });
         }
     });
@@ -41,30 +41,30 @@ $(document).ready(function() {
 
 function getBase64Image() {
 	var unsplashAPI = config.unsplashAPI;
-	var randNum = Math.floor(Math.random() * 2); //get random integer between 0 and 1 inclusive.
 	//var width = document.body.clientWidth;
 	
 	//get the image url, photographer name and Unsplash profile of a random image from the Unsplash API.
-	chrome.storage.sync.get(['unsplash', 'categories', 'featured'], function (obj) {
+	chrome.storage.sync.get(['unsplash', 'categories', 'additional'], function (obj) {
         if(obj.unsplash && obj.unsplash != ''){
             unsplashAPI = obj.unsplash;
         }
 
+        if(obj.additional){
+        	var additional = obj.additional.split(",");
+
+        	obj.categories = obj.categories.concat(additional)
+        }
+        console.log(obj.additional)
+
         if(obj.categories.length == 0){
-        	obj.categories = ["2", "4"]; //possible unsplash categories to pick from. 2 = nature, 3 = food&drink, 4 = buildings, 6 = people, 7 = technology, 8 = objects
+        	obj.categories = ["935527", "719"]; //default collection to use if none others are set - Yosemite
         }
 
-        if(obj.featured) {
-        	var featured = '&featured=true';
-        } else {
-        	var featured = '';
-        }
-
-        var randNum = Math.floor(Math.random() * obj.categories.length); //get random integer between 0 and 1 inclusive.
+        console.log(obj.categories);
 
         //clear the local storage of any previous data.
 		//console.log(obj.categories);
-		var url = 'https://api.unsplash.com/photos/random?client_id=' + unsplashAPI + featured + '&category=' + obj.categories[randNum] + '&orientation=landscape';
+		var url = 'https://api.unsplash.com/photos/random?client_id=' + unsplashAPI + '&collections=' + obj.categories.toString() + '&orientation=landscape';
 		//console.log(url);
 		$.getJSON(url, function(data) {
 			var url = data.urls.full;

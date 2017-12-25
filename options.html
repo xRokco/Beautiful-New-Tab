@@ -73,23 +73,26 @@
             <br/>
 
             Photo categories: <br/>
-            <label for="2">Buldings: </label><input type="checkbox" class="categories" id="2" name="2"><br>
-            <label for="3">Food & Drink: </label><input type="checkbox" class="categories" id="3" name="3"><br>
-            <label for="4">Nature: </label><input type="checkbox" class="categories" id="4" name="4"><br>
-            <label for="6">People: </label><input type="checkbox" class="categories" id="6" name="6"><br>
-            <label for="7">Technology: </label><input type="checkbox" class="categories" id="7" name="7"><br>
-            <label for="8">Objects: </label><input type="checkbox" class="categories" id="8" name="8"><br>
+            <label for="935527">Yosemite: </label><input type="checkbox" class="categories" id="935527" name="935527"> - <a href="https://unsplash.com/collections/935527">https://unsplash.com/collections/935527</a> <br>
+            <label for="1116586">Neon: </label><input type="checkbox" class="categories" id="1116586" name="1116586"> - <a href="https://unsplash.com/collections/1116586">https://unsplash.com/collections/1116586</a> <br>
+            <label for="719">People: </label><input type="checkbox" class="categories" id="719" name="719"> - <a href="https://unsplash.com/collections/719/">https://unsplash.com/collections/719</a> <br>
+            <label for="181581">Animals: </label><input type="checkbox" class="categories" id="181581" name="181581"> - <a href="https://unsplash.com/collections/181581">https://unsplash.com/collections/181581</a> <br>
+            <label for="661099">Space: </label><input type="checkbox" class="categories" id="661099" name="661099"> - <a href="https://unsplash.com/collections/661099">https://unsplash.com/collections/661099</a> <br>
+            <label for="288926">Food: </label><input type="checkbox" class="categories" id="288926" name="288926"> - <a href="https://unsplash.com/collections/288926">https://unsplash.com/collections/288926</a> <br>
+            <label for="219941">Buildings: </label><input type="checkbox" class="categories" id="219941" name="219941"> - <a href="https://unsplash.com/collections/219941">https://unsplash.com/collections/219941</a> <br>
 
             <br/>
-
-            <label for="featured">Only show featured photos: </label><input type="checkbox" id="featured" name="featured"> <br>
-            Featured photo's are often more beautiful than regular ones, but there are far fewer so you might see repetition.
+            <p> Check out the advanced settings below if you want to add more Unsplash collections for images to be pulled out of! </p>
 
             <br/>
             <br/>
 
             <button class="accordion">Advanced <span id="plus">+</span></button>
             <div class="panel">
+                <div>
+                    <label for="additional">Additional Unsplash collections:</label> <input type="text" id="additional" placeholder="420324,923267">
+                    <p>You can browse through <a href="https://unsplash.com/collections" >Unsplash collections</a> to find specific themes or types of photos you like from which the random photo can be pulled from. You can add extra collection IDs from the collection URL on the Unsplash site in this text box, separated by commas, to tailor the type of photos you get.</p>
+                </div> 
                 <div>
                     <p>You can put in raw html here to populate the links box if you know what you're doing</p>
                     <label for="raw">Use raw HTML:</label> <input type="checkbox" name="raw" id="raw"><br>
@@ -109,6 +112,8 @@
 
             <h1>Changelog</h1>
             <ul>
+                <h2>1.10</h2>
+                <li>Completely rewrote how the photo pulling based on category works as Unsplash deprecated their Category filter. It now uses collections, and you can add as many collections as you want to pull from, and there's a lift of some default ones I've added.</li>
                 <h2>1.9</h2>
                 <li>Fixed the other bookmarks check so it actually checks that you actually have bookmarks in the folder rather than just checking that the folder exists</li>
                 <li>Improved some responsiveness on narrow screens/half screen chrome layouts</li>
