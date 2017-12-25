@@ -72,14 +72,14 @@
 
             <br/>
 
-            Photo categories: <br/>
-            <label for="935527">Yosemite: </label><input type="checkbox" class="categories" id="935527" name="935527"> - <a href="https://unsplash.com/collections/935527">https://unsplash.com/collections/935527</a> <br>
-            <label for="1116586">Neon: </label><input type="checkbox" class="categories" id="1116586" name="1116586"> - <a href="https://unsplash.com/collections/1116586">https://unsplash.com/collections/1116586</a> <br>
-            <label for="719">People: </label><input type="checkbox" class="categories" id="719" name="719"> - <a href="https://unsplash.com/collections/719/">https://unsplash.com/collections/719</a> <br>
-            <label for="181581">Animals: </label><input type="checkbox" class="categories" id="181581" name="181581"> - <a href="https://unsplash.com/collections/181581">https://unsplash.com/collections/181581</a> <br>
-            <label for="661099">Space: </label><input type="checkbox" class="categories" id="661099" name="661099"> - <a href="https://unsplash.com/collections/661099">https://unsplash.com/collections/661099</a> <br>
-            <label for="288926">Food: </label><input type="checkbox" class="categories" id="288926" name="288926"> - <a href="https://unsplash.com/collections/288926">https://unsplash.com/collections/288926</a> <br>
-            <label for="219941">Buildings: </label><input type="checkbox" class="categories" id="219941" name="219941"> - <a href="https://unsplash.com/collections/219941">https://unsplash.com/collections/219941</a> <br>
+            Photo collections: <br/>
+            <label for="935527">Yosemite: </label><input type="checkbox" class="collections" id="935527" name="935527"> - <a href="https://unsplash.com/collections/935527">https://unsplash.com/collections/935527</a> <br>
+            <label for="1116586">Neon: </label><input type="checkbox" class="collections" id="1116586" name="1116586"> - <a href="https://unsplash.com/collections/1116586">https://unsplash.com/collections/1116586</a> <br>
+            <label for="719">People: </label><input type="checkbox" class="collections" id="719" name="719"> - <a href="https://unsplash.com/collections/719/">https://unsplash.com/collections/719</a> <br>
+            <label for="181581">Animals: </label><input type="checkbox" class="collections" id="181581" name="181581"> - <a href="https://unsplash.com/collections/181581">https://unsplash.com/collections/181581</a> <br>
+            <label for="661099">Space: </label><input type="checkbox" class="collections" id="661099" name="661099"> - <a href="https://unsplash.com/collections/661099">https://unsplash.com/collections/661099</a> <br>
+            <label for="288926">Food: </label><input type="checkbox" class="collections" id="288926" name="288926"> - <a href="https://unsplash.com/collections/288926">https://unsplash.com/collections/288926</a> <br>
+            <label for="219941">Buildings: </label><input type="checkbox" class="collections" id="219941" name="219941"> - <a href="https://unsplash.com/collections/219941">https://unsplash.com/collections/219941</a> <br>
 
             <br/>
             <p> Check out the advanced settings below if you want to add more Unsplash collections for images to be pulled out of! </p>
@@ -112,6 +112,9 @@
 
             <h1>Changelog</h1>
             <ul>
+                <h2>1.11</h2>
+                <li>Hotfix to a bug introduced last night related to the upgrading of the config object the extensions uses. I realised the extension would break if upgrading from v1.9 without a fresh install because of the way certain settings changed.</li>
+                <li>I hope this bug didn't ruin your Christmas Day. I magically realised this bug would happen while skiing down a mountain in France and then had to come home to fix it.</li>
                 <h2>1.10</h2>
                 <li>Completely rewrote how the photo pulling based on category works as Unsplash deprecated their Category filter. It now uses collections, and you can add as many collections as you want to pull from, and there's a lift of some default ones I've added.</li>
                 <h2>1.9</h2>

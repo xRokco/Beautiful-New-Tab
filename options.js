@@ -9,13 +9,13 @@ function save_options() {
     var raw = document.getElementById('raw').checked
     var weather = document.getElementById('weather').value;
     var unsplash = document.getElementById('unsplash').value;
-    var categories = document.getElementsByClassName('categories');
+    var collections = document.getElementsByClassName('collections');
     var additional = document.getElementById('additional').value;
     var bookmark = document.getElementById('bookmark').checked;
 
-    for (var i = 0; i < categories.length; i++){
-        if(categories[i].checked){
-            catarray.push(categories[i].name);
+    for (var i = 0; i < collections.length; i++){
+        if(collections[i].checked){
+            catarray.push(collections[i].name);
         }
     }
 
@@ -41,7 +41,7 @@ function save_options() {
         raw: raw,
         weather: weather,
         unsplash: unsplash,
-        categories: catarray,
+        collections: catarray,
         additional: additional,
         bookmark: bookmark
     }, function() {
@@ -77,7 +77,7 @@ function restore_options() {
         raw: false,
         weather: '',
         unsplash: '',
-        categories: ["935527", "719"],
+        collections: ["935527", "719"],
         additional: '',
         bookmark: false
     }, function(items) {
@@ -88,8 +88,8 @@ function restore_options() {
         document.getElementById('unsplash').value = items.unsplash;
         document.getElementById('additional').value = items.additional;
         document.getElementById('bookmark').checked = items.bookmark;
-        for (var i = 0; i < items.categories.length; i++){
-            document.getElementsByName(items.categories[i])[0].checked = true;
+        for (var i = 0; i < items.collections.length; i++){
+            document.getElementsByName(items.collections[i])[0].checked = true;
         }
         if(items.raw == true){
             document.getElementById('advanced').value = items.links;    

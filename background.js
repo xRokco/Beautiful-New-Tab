@@ -6,7 +6,13 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 $(document).ready(function() {
 	chrome.storage.sync.get('links', function (obj) {
 		console.log("Set initial options");
-        if (!obj.links) {
+        if (obj.categories || !obj.collections) {
+            delete obj.categories;
+            chrome.storage.sync.set({
+                collections: ['935527']
+            });
+        }
+        if (obj.links) {
         	chrome.tabs.create({'url':'/options.html'})
             chrome.storage.sync.set({
                 temperature: 'c',
@@ -33,7 +39,7 @@ $(document).ready(function() {
                 weather: '',
                 unsplash: '',
                 additional: '',
-                categories: ['935527']
+                collections: ['935527']
             });
         }
     });
@@ -44,7 +50,7 @@ function getBase64Image() {
 	//var width = document.body.clientWidth;
 	
 	//get the image url, photographer name and Unsplash profile of a random image from the Unsplash API.
-	chrome.storage.sync.get(['unsplash', 'categories', 'additional'], function (obj) {
+	chrome.storage.sync.get(['unsplash', 'collections', 'additional'], function (obj) {
         if(obj.unsplash && obj.unsplash != ''){
             unsplashAPI = obj.unsplash;
         }
@@ -52,19 +58,18 @@ function getBase64Image() {
         if(obj.additional){
         	var additional = obj.additional.split(",");
 
-        	obj.categories = obj.categories.concat(additional)
-        }
-        console.log(obj.additional)
-
-        if(obj.categories.length == 0){
-        	obj.categories = ["935527", "719"]; //default collection to use if none others are set - Yosemite
+        	obj.collections = obj.collections.concat(additional)
         }
 
-        console.log(obj.categories);
+        if(obj.collections.length == 0){
+        	obj.collections = ["935527", "719"]; //default collection to use if none others are set - Yosemite
+        }
+
+        console.log(obj.collections);
 
         //clear the local storage of any previous data.
-		//console.log(obj.categories);
-		var url = 'https://api.unsplash.com/photos/random?client_id=' + unsplashAPI + '&collections=' + obj.categories.toString() + '&orientation=landscape';
+		//console.log(obj.collections);
+		var url = 'https://api.unsplash.com/photos/random?client_id=' + unsplashAPI + '&collections=' + obj.collections.toString() + '&orientation=landscape';
 		//console.log(url);
 		$.getJSON(url, function(data) {
 			var url = data.urls.full;
