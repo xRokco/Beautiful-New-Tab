@@ -188,7 +188,7 @@ function loadWeather(lat, lon) {
             }
 
             //set the temperature with weather icon
-            document.getElementById('weather').innerHTML = '<i class="owf owf-' + data.weather[0].id + suffix + '"></i> ' + temp + code;
+            document.getElementById('weather').innerHTML = '<a title="' + data.weather[0].description.charAt(0).toUpperCase() + data.weather[0].description.slice(1) + ' with wind speeds of ' + data.wind.speed + 'm/s." href="https://openweathermap.org/city/' + data.id + '" ><i class="owf owf-' + data.weather[0].id + suffix + '"></i> ' + temp + code + '</a>';
         });
     });
 }

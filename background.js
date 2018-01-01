@@ -12,7 +12,7 @@ $(document).ready(function() {
                 collections: ['935527']
             });
         }
-        if (obj.links) {
+        if (!obj.links) {
         	chrome.tabs.create({'url':'/options.html'})
             chrome.storage.sync.set({
                 temperature: 'c',
