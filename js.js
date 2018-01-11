@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    //backdrop();
+    backdrop();
     chrome.runtime.sendMessage({text: "newtab"});
 
     //generate a new image on click of the info button
@@ -17,36 +17,19 @@ $(document).ready(function() {
 
     //Get a background image
     function backdrop() {
-        // var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);
-
-        // db.transaction(function (tx) { //check if you have an image cached, if so, use it
-        //     tx.executeSql('SELECT * FROM IMAGE', [], function (tx, results) {
-        //         if(results.rows.length > 0){
-        //             document.getElementById("body").style.backgroundImage = "url('"+results.rows[0].imgData+"')";
-        //             var credit = 'Photo by <a href="' + results.rows[0].unsplashLink + '?utm_source=newtabpage&utm_medium=referral&utm_campaign=api-credit" target="_blank">' + results.rows[0].photographerName + '</a> on Unsplash';
-        //             document.getElementById('infodiv').innerHTML = credit;
-        //         } else {
-        //             console.log("no image cached, using backup image");
-        //             backup();
-        //         }
-        //     }, null);
-        // });
-
         //check if you have an image cached, if so, use it
-        if (localStorage.getItem('imgSaved')) {
-            console.log("trying to get saved image");
-            //set the background to the cached image
-            var imgSaved = localStorage.getItem('imgSaved');
-            document.getElementById("body").style.backgroundImage = "url('"+imgSaved+"')";
-            //update the image metadata previously cached
-            var linkSaved = localStorage.getItem('linkSaved');
-            var nameSaved = localStorage.getItem('nameSaved');
-            var credit = 'Photo by <a href="' + linkSaved + '?utm_source=beautifulnewtab&utm_medium=referral&utm_campaign=api-credit" target="_blank">' + nameSaved + '</a> on Unsplash';
-            document.getElementById('infodiv').innerHTML = credit;
-        } else {
-            console.log("no image cached, using backup image");
-            backup();
-        }
+        chrome.storage.local.get(null, function (obj) { 
+            if (obj.imgSaved) {
+                //set the background to the cached image
+                document.getElementById("body").style.backgroundImage = "url('"+obj.imgSaved+"')";
+                //update the image metadata previously cached
+                var credit = 'Photo by <a href="' + obj.linkSaved + '?utm_source=beautifulnewtab&utm_medium=referral&utm_campaign=api-credit" target="_blank">' + obj.nameSaved + '</a> on Unsplash';
+                document.getElementById('infodiv').innerHTML = credit;
+            } else {
+                console.log("no image cached, using backup image");
+                backup();
+            }
+        });
     }
 
     //This function is called when there's an issue getting an image fron Unsplash
@@ -78,8 +61,6 @@ $(document).ready(function() {
         var alttext = alt[altcode];
         document.getElementById("infodiv").innerHTML = alttext;
     }
-
-    backdrop();
 
     //Date and Time
     function checkTime(i) {

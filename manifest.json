@@ -1,6 +1,6 @@
 {
 	"name": "Beautiful New Tab",
-	"version": "1.13",
+	"version": "1.15",
 	"minimum_chrome_version": "37",
 	"manifest_version": 2,
 	"description": "A beautiful new tab page",
@@ -13,7 +13,8 @@
 		"geolocation",
 		"storage",
 		"bookmarks",
-		"chrome://favicon/"
+		"chrome://favicon/",
+		"unlimitedStorage"
 	],
 	"background": {
     	"scripts": ["jquery.min.js","config.js","background.js"]
