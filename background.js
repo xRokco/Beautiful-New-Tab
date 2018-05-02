@@ -70,43 +70,45 @@ function getBase64Image() {
         //clear the local storage of any previous data.
         var url = 'https://api.unsplash.com/photos/random?client_id=' + unsplashAPI + '&collections=' + obj.collections.toString() + '&orientation=landscape';
         $.getJSON(url, function(data) {
-            var url = data.urls.full;
+            var url = data.links.download_location;
             var link = data.user.links.html;
             var name = data.user.name;
 
-            //create a new image to cache
-            var img= new Image();
-            img.setAttribute('crossOrigin', 'anonymous'); //set this attribute to get around cross origin canvas security stuff.
-            img.src = url;
-            img.onload = function(e) { //when the img loads, do some stuff
-                var canvas = document.createElement("canvas"); //create a canvas
-        
-                //set canvas width and height to image width and height
-                canvas.width = img.width;
-                canvas.height = img.height;
+            $.getJSON(url + '?client_id=' + unsplashAPI, function(data) {
+                //create a new image to cache
+                var img= new Image();
+                img.setAttribute('crossOrigin', 'anonymous'); //set this attribute to get around cross origin canvas security stuff.
+                img.src = data.url;
+                img.onload = function(e) { //when the img loads, do some stuff
+                    var canvas = document.createElement("canvas"); //create a canvas
+            
+                    //set canvas width and height to image width and height
+                    canvas.width = img.width;
+                    canvas.height = img.height;
 
-                var ctx = canvas.getContext("2d");
-                ctx.drawImage(img, 0, 0); //add the image to the canvas
+                    var ctx = canvas.getContext("2d");
+                    ctx.drawImage(img, 0, 0); //add the image to the canvas
 
-                var imgData = canvas.toDataURL("image/jpeg"); //convert canvas to base64 data url
+                    var imgData = canvas.toDataURL("image/jpeg"); //convert canvas to base64 data url
 
-                chrome.storage.local.clear();
+                    chrome.storage.local.clear();
 
-                try {
-                    // localStorage.setItem("imgSaved", imgData);
-                    // localStorage.setItem("linkSaved", link);
-                    // localStorage.setItem("nameSaved", name);
-                    chrome.storage.local.set({
-                        imgSaved: imgData,
-                        linkSaved: link,
-                        nameSaved: name
-                    });
-                    console.log("success, image cached");
-                } catch(err) {
-                    console.log("failed, retrying");
-                    getBase64Image();
-                }
-            };
+                    try {
+                        // localStorage.setItem("imgSaved", imgData);
+                        // localStorage.setItem("linkSaved", link);
+                        // localStorage.setItem("nameSaved", name);
+                        chrome.storage.local.set({
+                            imgSaved: imgData,
+                            linkSaved: link,
+                            nameSaved: name
+                        });
+                        console.log("success, image cached");
+                    } catch(err) {
+                        console.log("failed, retrying");
+                        getBase64Image();
+                    }
+                };
+            });
         }).error(function() { //if the API call fails, run the backup function
             console.log("error in API call");
         });
