@@ -1,6 +1,6 @@
 {
 	"name": "Beautiful New Tab",
-	"version": "1.15",
+	"version": "1.16",
 	"minimum_chrome_version": "37",
 	"manifest_version": 2,
 	"description": "A beautiful new tab page",
