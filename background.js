@@ -6,14 +6,18 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 $(document).ready(function() {
     chrome.storage.sync.get(null, function (obj) {
         console.log("Set initial options");
-        if (obj.categories || !obj.collections) {
+        if (obj.categories ) {
             chrome.storage.sync.remove(categories);
+        }
+
+        if (!obj.collections) {
             chrome.storage.sync.set({
                 collections: ['935527']
             });
         }
+
         if (!obj.links) {
-            chrome.tabs.create({'url':'/options.html'})
+            //chrome.tabs.create({'url':'/options.html'})
             chrome.storage.sync.set({
                 temperature: 'c',
                 time: 24,
@@ -71,7 +75,7 @@ function getBase64Image() {
         var url = 'https://api.unsplash.com/photos/random?client_id=' + unsplashAPI + '&collections=' + obj.collections.toString() + '&orientation=landscape';
         $.getJSON(url, function(data) {
             var url = data.links.download_location;
-            var link = data.user.links.html;
+            var link = data.links.html;
             var name = data.user.name;
 
             $.getJSON(url + '?client_id=' + unsplashAPI, function(data) {
