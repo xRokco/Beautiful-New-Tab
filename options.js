@@ -35,15 +35,15 @@ function save_options() {
     }
   
     chrome.storage.sync.set({
-        temperature: temperature,
-        time: time,
+        additional: additional,
+        bookmark: bookmark,
+        collections: catarray,
         links: arr,
         raw: raw,
-        weather: weather,
+        temperature: temperature,
+        time: time,
         unsplash: unsplash,
-        collections: catarray,
-        additional: additional,
-        bookmark: bookmark
+        weather: weather
     }, function() {
         // Update status to let user know options were saved.
         var status = document.getElementById('status');

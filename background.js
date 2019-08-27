@@ -6,21 +6,12 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 $(document).ready(function() {
     chrome.storage.sync.get(null, function (obj) {
         console.log("Set initial options");
-        if (obj.categories ) {
-            chrome.storage.sync.remove(categories);
-        }
 
         if (!obj.collections) {
             chrome.storage.sync.set({
-                collections: ['935527']
-            });
-        }
-
-        if (!obj.links) {
-            //chrome.tabs.create({'url':'/options.html'})
-            chrome.storage.sync.set({
-                temperature: 'c',
-                time: 24,
+                additional: '',
+                bookmark: false,
+                collections: ['935527'],
                 links: [
                     {
                         label: 'Facebook',
@@ -40,10 +31,10 @@ $(document).ready(function() {
                     }
                 ],
                 raw: false,
-                weather: '',
+                temperature: 'c',
+                time: 24,
                 unsplash: '',
-                additional: '',
-                collections: ['935527']
+                weather: ''
             });
         }
     });
