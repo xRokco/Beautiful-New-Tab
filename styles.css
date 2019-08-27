@@ -9,7 +9,7 @@ body {
     -o-background-size: cover;
     background-size: cover;
     background-position: center center;
-
+    font-family: 'Lato', sans-serif;
 }
 
 body {
@@ -38,7 +38,6 @@ body:after {
 	padding-left: 7px;
 	width: 100%;
 	display: none;
-	font-family: 'Roboto', sans-serif;
 	white-space: nowrap;
 }
 
@@ -209,7 +208,6 @@ body:after {
 #txt {
 	font-size: 220px;
 	color: lightgrey;
-	font-family: 'Raleway', sans-serif;
 	position: absolute;
 	bottom: 120px;
 	right: 100px;
@@ -219,7 +217,6 @@ body:after {
 #txt2 {
 	font-size: 70px;
 	color: lightgrey;
-	font-family: 'Raleway', sans-serif;
 	position: absolute;
 	bottom: 50px;
 	right: 100px;
@@ -229,7 +226,6 @@ body:after {
 #txt3 {
 	font-size: 30px;
 	color: lightgrey;
-	font-family: 'Raleway', sans-serif;
 	position: absolute;
 	top: 60px;
 	left: 100px;
@@ -263,7 +259,6 @@ body:after {
 #infodiv {
 	font-size: 15px;
 	color: lightgrey;
-	font-family: 'Raleway', sans-serif;
 	top: 35px;
 	right: 80px;
 	height: 30px;
@@ -282,7 +277,6 @@ body:after {
 }
 
 #weather {
-	font-family: 'Raleway', sans-serif;
 	font-size: 80px;
 	color: lightgrey;
 	position: absolute;
@@ -299,7 +293,6 @@ body:after {
 a {
 	text-decoration: none;
 	color: lightgrey;
-	font-family: 'Raleway', sans-serif;
 	cursor: pointer;
 }
 

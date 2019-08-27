@@ -3,7 +3,7 @@ $(document).ready(function() {
     chrome.runtime.sendMessage({text: "newtab"});
 
     //generate a new image on click of the info button
-    $('#info').click(function(){
+    $('#infoicon').click(function(){
         backdrop();
         chrome.runtime.sendMessage({text: "newtab"});
     });
