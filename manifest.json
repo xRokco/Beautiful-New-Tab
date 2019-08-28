@@ -1,9 +1,9 @@
 {
-	"name": "Beautiful New Tab",
-	"version": "1.19",
+	"name": "Blowhole",
+	"version": "1.20",
 	"minimum_chrome_version": "37",
 	"manifest_version": 2,
-	"description": "A beautiful new tab page",
+	"description": "A alternate new tab page for Google Chrome which uses a random photo from Unsplash",
 	"icons": {
 		"128": "icon_128.png",
 		 "48": "icon_48.png",
